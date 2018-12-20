@@ -1,23 +1,13 @@
-<!doctype html>
-<html>
+{{ define "content" }}
 
-<head>
-  <title>Hudson Valley Life Skills Trainers</title>
-  <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-</head>
-
-<body>
-  <img src="static/images/cpr_practice.png" width="50%" alt="Practicing CPR" class="center" />
-  <div class="center">
-    <h1>Hudson Valley Life Skills Trainers</h1>
     {{with .Notice}}<div id="notice">{{.}}</div>{{end}}
-
+<!--
     <form action="/" method="post">
       <div>Name: <input name="author" value="{{.Author}}"></div>
       <div>Message: <input name="message"></div>
       <input type="submit">
     </form>
+  -->
 
     <h2>Who We Are</h2>
     <p>
@@ -28,7 +18,7 @@
       and Babysitting Training for adolescents. We also provide personal
       technology coaching and consulting.
     </p>
-    <h2>Our Skills</h2>
+    <!-- <h2>Our Skills</h2>
     <p>
       Liz Poling-Hiraldo is a certified by the American Red Cross, American Safety & Health Institute, MedicFirst and Safe Sitter.
     </p>
@@ -55,12 +45,6 @@
       The training and certifications we provide are highly customizable. Which certifying body you choose has an effect on pricing. Which precise set of skill you require also affects pricing. (For instance, you may opt for the adult-only CPR training without
       child or infant certification.) We want to provide high quality training to everyone who wants it. As such we will be competitive with other local providers. Please contact us for an initial consultation to determine the best way to satisfy your
       needs.
-    </p>
+    </p> -->
 
-
-  </div>
-
-
-</body>
-
-</html>
+{{ end }}

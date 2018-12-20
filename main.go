@@ -26,15 +26,10 @@ type Post struct {
 	Posted  time.Time
 }
 
-var (
-	indexTemplate = template.Must(template.ParseFiles("index.html"))
-)
+// var (
+// 	indexTemplate = template.Must(template.ParseFiles("index.html"))
+// )
 
-// func main() {
-//
-// 	http.HandleFunc("/", indexHandler)
-// 	appengine.Main() // Starts the server to receive requests
-// }
 func init() {
 
 	http.HandleFunc("/", indexHandler)
@@ -47,8 +42,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// redirected to http://[YOUR_PROJECT_ID].appspot.com.
 	params := templateParams{}
 
+	page:=template.Must(template.ParseFiles(
+		"static/_base.html",
+		"static/index.html",
+		))
+
 	if r.Method == "GET" {
-		indexTemplate.Execute(w, params)
+		page.Execute(w, params)
 		return
 	}
 
@@ -58,7 +58,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	params.Author = author // Preserve the name field.
 	if author == "" {
 		params.Notice = "A name is required"
-		indexTemplate.Execute(w, params)
+		page.Execute(w, params)
 		return
 	}
 
@@ -66,7 +66,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 
 		params.Notice = "No message provided"
-		indexTemplate.Execute(w, params)
+		page.Execute(w, params)
 		return
 	}
 
@@ -89,13 +89,13 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		params.Notice = "Couldn't add new post. Try again?"
 		params.Message = post.Message // Preserve their message so they can try again.
-		indexTemplate.Execute(w, params)
+		page.Execute(w, params)
 		return
 	}
 	params.Notice = fmt.Sprintf("Thank you for your submission, %s!", author)
 
 	// [START execute]
-	indexTemplate.Execute(w, params)
+	page.Execute(w, params)
 	// [END execute]
 
 }
