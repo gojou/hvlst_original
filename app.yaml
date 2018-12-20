@@ -8,6 +8,12 @@ handlers:
 #   upload: index.html
 
 # Otherwise, find file in static directory
+- url: /static/img
+  static_dir: static/img
+
+- url: /static/css
+  static_dir: static/css
+
 - url: /static
   static_dir: static
 

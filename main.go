@@ -31,8 +31,8 @@ type Post struct {
 // )
 
 func init() {
-	fs := http.FileServer(http.Dir("static"))
-  http.Handle("/static/", http.StripPrefix("/static/", fs))
+	// fs := http.FileServer(http.Dir("static"))
+  // http.Handle("/static/", http.StripPrefix("/static/", fs))
 	http.HandleFunc("/", indexHandler)
 	appengine.Main() // Starts the server to receive requests
 }
