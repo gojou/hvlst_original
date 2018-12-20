@@ -32,12 +32,12 @@ type Post struct {
 
 func main() {
 	http.Handle("/static/images/", //final url can be anything
-	      http.StripPrefix("/static/images/",
-	         http.FileServer(http.Dir("static/images"))))
+		http.StripPrefix("/static/images/",
+			http.FileServer(http.Dir("static/images"))))
 
-					 http.Handle("/static/css/", //final url can be anything
-					 			http.StripPrefix("/static/css/",
-					 				 http.FileServer(http.Dir("static/css"))))
+	http.Handle("/static/css/", //final url can be anything
+		http.StripPrefix("/static/css/",
+			http.FileServer(http.Dir("static/css"))))
 
 	http.HandleFunc("/", indexHandler)
 	appengine.Main() // Starts the server to receive requests
@@ -49,10 +49,10 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// redirected to http://[YOUR_PROJECT_ID].appspot.com.
 	params := templateParams{}
 
-	page:=template.Must(template.ParseFiles(
+	page := template.Must(template.ParseFiles(
 		"static/_base.html",
 		"static/index.html",
-		))
+	))
 
 	if r.Method == "GET" {
 		page.Execute(w, params)
