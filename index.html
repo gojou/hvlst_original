@@ -1,0 +1,50 @@
+{{ define "content" }}
+
+    {{with .Notice}}<div id="notice">{{.}}</div>{{end}}
+
+    <form action="/" method="post">
+      <div>Name: <input name="author" value="{{.Author}}"></div>
+      <div>Message: <input name="message"></div>
+      <input type="submit">
+    </form>
+
+
+    <h2>Who We Are</h2>
+    <p>
+      Hudson Valley Life Skills Trainers, LLC is a family-owned business dedicated to
+      delivering the highest quality lifesaving and pediatric care training
+      available. We offer training in Adult, Child and Pediatric CPR/AED/First
+      Aid, Advanced First Aid and Bleeding Control, Wilderness Remote First Aid,
+      and Babysitting Training for adolescents. We also provide personal
+      technology coaching and consulting.
+    </p>
+    <!-- <h2>Our Skills</h2>
+    <p>
+      Liz Poling-Hiraldo is a certified by the American Red Cross, American Safety & Health Institute, MedicFirst and Safe Sitter.
+    </p>
+    <p>
+      Mark Poling has over 25 years as a Computer Skills Trainer, Technical Writer, and Business Consultant.
+    </p>
+    <h2>Our Training Equipment</h2>
+    <p>
+      We identified early on that the quality of training is highly dependent on the confidence participants feel while they practice on their CPR manikins. We have invested in Adult and Infant manikins that provide both audible and visual feedback during practice
+      sessions. When a participant performs an effective chest thrust the manikins “click”. Lights on the manikins let the person know if their rhythm is too slow, too fast, or just right. Repetitions performed with these sensory feedbacks help students
+      master these skills more quickly and thoroughly. We also have equipment that allows participants to perform realistic choking First Aid. Most First Aid trainers walk trainees through the motions of performing back blows and Heimlich maneuvers. We
+      have vests that allow our students to perform actual Heimlich thrusts to clear a blockage from a simulated airway. Realistic repetitions allow the participants we certify to be confident they can act competently in a real-life emergency.
+    </p>
+
+    <h2>The Training Environment </h2>
+    <p>
+      The American Red Cross / American Safety and Health Institute (ASHI) training we provide includes a mix of lecture, video, and hands-on practice and assessment. For organizations that don’t have it, we can provide appropriate AV solutions to train your
+      personnel in your own workspace. If you don’t have appropriate facilities, we can work with you to find convenient locations and times to meet your needs. Our goal is to provide maximum flexibility to make sure that everyone who wants and needs
+      this training is able to get it. Our Certifications We can certify participants through either the American Red Cross or the American Safety and Health Institute (ASHI). Which you choose depends on the needs and requirements of your organization.
+      Each organization provides standardized curriculum and supporting media to ensure high-quality training for participants. Contact us to learn the differences between the two programs and which would be best suited for you.
+    </p>
+    <h2>Our Pricing </h2>
+    <p>
+      The training and certifications we provide are highly customizable. Which certifying body you choose has an effect on pricing. Which precise set of skill you require also affects pricing. (For instance, you may opt for the adult-only CPR training without
+      child or infant certification.) We want to provide high quality training to everyone who wants it. As such we will be competitive with other local providers. Please contact us for an initial consultation to determine the best way to satisfy your
+      needs.
+    </p> -->
+
+{{ end }}
