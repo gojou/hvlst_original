@@ -1,5 +1,5 @@
 // package main
-package lifeskills
+package main
 
 import (
 	"fmt"
@@ -30,7 +30,14 @@ type Post struct {
 // 	indexTemplate = template.Must(template.ParseFiles("index.html"))
 // )
 
-func init() {
+func main() {
+	http.Handle("/static/images/", //final url can be anything
+	      http.StripPrefix("/static/images/",
+	         http.FileServer(http.Dir("static/images"))))
+
+					 http.Handle("/static/css/", //final url can be anything
+					 			http.StripPrefix("/static/css/",
+					 				 http.FileServer(http.Dir("static/css"))))
 
 	http.HandleFunc("/", indexHandler)
 	appengine.Main() // Starts the server to receive requests
