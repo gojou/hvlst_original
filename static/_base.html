@@ -2,96 +2,68 @@
 <html>
 
 <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width-device-width, initial-scale=1, shrink-to-fit=no">
+
+
   <title>Hudson Valley Life Skills Trainers</title>
   <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="/static/css/style.css">
 </head>
 
+
 <body>
 
-  <div class="navbar nvavbar-default navbar-fixed-top">
-    <!-- <img src="static/images/cpr_practice.png" width="50%" alt="Practicing CPR" class="center" /> -->
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">HVLST</a>
 
-    <div class="container">
-      <a href="#" class="navbar-brand">HVLST</a>
-      <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-        <span class="icon-bar">-</span>
-        <span class="icon-bar">-</span>
-        <span class="icon-bar">-</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
       </button>
-
-      </menu>
-      <div class="collapse navbar-collapse navHeaderCollapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Trainers</a></li>
-          <li><a href="#">Environment</a></li>
-          <li><a href="#">Courses</a></li>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbar-dropdown" data-toggle="dropdown">Courses</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">First Aid/CPR/AED</a>
+              <a class="dropdown-item" href="#">Wilderness Survival</a>
+              <a class="dropdown-item" href="#">Babysitting</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
         </ul>
       </div>
+    </nav>
+    <div class="jumbotron">
+      <div class="jumboHVLST">
+        <h1 class="display-4" id="jumbocustom">Hudson Valley Life Skills Trainers</h1>
+
+        <p class="lead" id="jumbocustom">
+          First Aid, CPR, Wilderness&nbsp;Survival, and Babysitting training.
+        </p>
+      </div>
     </div>
-  </div>
+
+    <div class="container">
+      {{template "content" .}}
+    </div>
 
 
 
-
-  <div class="center">
-    <h1>Hudson Valley Life Skills Trainers</h1>
-
-    {{template "content" .}}
-    <!-- {{with .Notice}}<div id="notice">{{.}}</div>{{end}}
-
-    <form action="/" method="post">
-      <div>Name: <input name="author" value="{{.Author}}"></div>
-      <div>Message: <input name="message"></div>
-      <input type="submit">
-    </form>
-
-    <h2>Who We Are</h2>
-    <p>
-      Hudson Valley Life Skills Trainers is a family-owned business dedicated to
-      delivering the highest quality lifesaving and pediatric care training
-      available. We offer training in Adult, Child and Pediatric CPR/AED/First
-      Aid, Advanced First Aid and Bleeding Control, Wilderness Remote First Aid,
-      and Babysitting Training for adolescents. We also provide personal
-      technology coaching and consulting.
-    </p>
-    <h2>Our Skills</h2>
-    <p>
-      Liz Poling-Hiraldo is a certified by the American Red Cross, American Safety & Health Institute, MedicFirst and Safe Sitter.
-    </p>
-    <p>
-      Mark Poling has over 25 years as a Computer Skills Trainer, Technical Writer, and Business Consultant.
-    </p>
-    <h2>Our Training Equipment</h2>
-    <p>
-      We identified early on that the quality of training is highly dependent on the confidence participants feel while they practice on their CPR manikins. We have invested in Adult and Infant manikins that provide both audible and visual feedback during practice
-      sessions. When a participant performs an effective chest thrust the manikins “click”. Lights on the manikins let the person know if their rhythm is too slow, too fast, or just right. Repetitions performed with these sensory feedbacks help students
-      master these skills more quickly and thoroughly. We also have equipment that allows participants to perform realistic choking First Aid. Most First Aid trainers walk trainees through the motions of performing back blows and Heimlich maneuvers. We
-      have vests that allow our students to perform actual Heimlich thrusts to clear a blockage from a simulated airway. Realistic repetitions allow the participants we certify to be confident they can act competently in a real-life emergency.
-    </p>
-
-    <h2>The Training Environment </h2>
-    <p>
-      The American Red Cross / American Safety and Health Institute (ASHI) training we provide includes a mix of lecture, video, and hands-on practice and assessment. For organizations that don’t have it, we can provide appropriate AV solutions to train your
-      personnel in your own workspace. If you don’t have appropriate facilities, we can work with you to find convenient locations and times to meet your needs. Our goal is to provide maximum flexibility to make sure that everyone who wants and needs
-      this training is able to get it. Our Certifications We can certify participants through either the American Red Cross or the American Safety and Health Institute (ASHI). Which you choose depends on the needs and requirements of your organization.
-      Each organization provides standardized curriculum and supporting media to ensure high-quality training for participants. Contact us to learn the differences between the two programs and which would be best suited for you.
-    </p>
-    <h2>Our Pricing </h2>
-    <p>
-      The training and certifications we provide are highly customizable. Which certifying body you choose has an effect on pricing. Which precise set of skill you require also affects pricing. (For instance, you may opt for the adult-only CPR training without
-      child or infant certification.) We want to provide high quality training to everyone who wants it. As such we will be competitive with other local providers. Please contact us for an initial consultation to determine the best way to satisfy your
-      needs.
-    </p>
-
-
-  </div>
- -->
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Must be at the bottom of the body tag -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>
