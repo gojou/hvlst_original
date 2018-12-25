@@ -18,3 +18,7 @@
   color: rgba(0, 0, 255, 1.0);
   font-weight: 600;
 }
+
+.card {
+  margin-top: 24px;
+}

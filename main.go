@@ -38,11 +38,28 @@ func main() {
 	// http.Handle("/static/css/", //final url can be anything
 	// 	http.StripPrefix("/static/css/",
 	// 		http.FileServer(http.Dir("static/css"))))
-
+	http.HandleFunc("/courses", coursesHandler)
 	http.HandleFunc("/", indexHandler)
 	appengine.Main() // Starts the server to receive requests
 }
+func coursesHandler(w http.ResponseWriter, r *http.Request) {
 
+	params := templateParams{}
+
+	// no need to handle 404 situations, will fall throuth REGEX
+	// to the indexHandler
+
+	page := template.Must(template.ParseFiles(
+		"static/_base.html",
+		"static/courses.html",
+	))
+
+	if r.Method == "GET" {
+		page.Execute(w, params)
+		return
+	}
+
+}
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// if statement redirects all invalid URLs to the root homepage.
 	// Ex: if URL is http://[YOUR_PROJECT_ID].appspot.com/FOO, it will be
