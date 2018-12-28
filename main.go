@@ -13,19 +13,6 @@ import (
 	"google.golang.org/appengine"
 )
 
-// type templateParams struct {
-// 	Notice  string
-// 	Author  string
-// 	Message string
-// 	Posts   []Post
-// }
-
-// type Post struct {
-// 	Author  string
-// 	Message string
-// 	Posted  time.Time
-// }
-
 type Post struct {
 	FirstName string
 	LastName  string
@@ -48,11 +35,14 @@ type prospectParams struct {
 func main() {
 	http.HandleFunc("/courses/babysitting", babysittingHandler)
 	http.HandleFunc("/courses/first-aid-cpr-aed", facaHandler)
+	http.HandleFunc("courses/wilderness-first-aid", wfaHandler)
 	http.HandleFunc("/courses", coursesHandler)
 	http.HandleFunc("/contact", contactHandler)
+	http.HandleFunc("/about", aboutHandler)
 	http.HandleFunc("/", indexHandler)
 	appengine.Main() // Starts the server to receive requests
 }
+
 func facaHandler(w http.ResponseWriter, r *http.Request) {
 	params := prospectParams{}
 
@@ -79,6 +69,42 @@ func babysittingHandler(w http.ResponseWriter, r *http.Request) {
 	page := template.Must(template.ParseFiles(
 		"static/_base.html",
 		"static/babysitting.html",
+	))
+
+	if r.Method == "GET" {
+		page.Execute(w, params)
+		return
+	}
+
+}
+
+func aboutHandler(w http.ResponseWriter, r *http.Request) {
+	params := prospectParams{}
+
+	// no need to handle 404 situations, will fall throuth REGEX
+	// to the indexHandler
+
+	page := template.Must(template.ParseFiles(
+		"static/_base.html",
+		"static/about.html",
+	))
+
+	if r.Method == "GET" {
+		page.Execute(w, params)
+		return
+	}
+
+}
+
+func wfaHandler(w http.ResponseWriter, r *http.Request) {
+	params := prospectParams{}
+
+	// no need to handle 404 situations, will fall throuth REGEX
+	// to the indexHandler
+
+	page := template.Must(template.ParseFiles(
+		"static/_base.html",
+		"static/wilderness-first-aid.html",
 	))
 
 	if r.Method == "GET" {
@@ -192,19 +218,27 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	// if statement redirects all invalid URLs to the root homepage.
-	// Ex: if URL is http://[YOUR_PROJECT_ID].appspot.com/FOO, it will be
-	// redirected to http://[YOUR_PROJECT_ID].appspot.com.
 	params := prospectParams{}
+
+	// Set the default page
 
 	page := template.Must(template.ParseFiles(
 		"static/_base.html",
 		"static/index.html",
 	))
 
+	//Overwrite the default page if it's an odball URL
+	if r.URL.Path != "/" {
+		page = template.Must(template.ParseFiles(
+			"static/_base.html",
+			"static/404.html",
+		))
+
+	}
+
 	if r.Method == "GET" {
 		page.Execute(w, params)
-		return
+		//	return
 	}
 
 }
