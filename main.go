@@ -13,7 +13,7 @@ import (
 	"google.golang.org/appengine"
 )
 
-type Post struct {
+type Contact struct {
 	FirstName string
 	LastName  string
 	EmailAddr string
@@ -29,13 +29,13 @@ type prospectParams struct {
 	EmailAddr string
 	Phone     string
 	Message   string
-	Posts     []Post
+	Contacts     []Contact
 }
 
 func main() {
 	http.HandleFunc("/courses/babysitting", babysittingHandler)
 	http.HandleFunc("/courses/first-aid-cpr-aed", facaHandler)
-	http.HandleFunc("courses/wilderness-first-aid", wfaHandler)
+	http.HandleFunc("/courses/wilderness-first-aid", wfaHandler)
 	http.HandleFunc("/courses", coursesHandler)
 	http.HandleFunc("/contact", contactHandler)
 	http.HandleFunc("/about", aboutHandler)
@@ -45,10 +45,6 @@ func main() {
 
 func facaHandler(w http.ResponseWriter, r *http.Request) {
 	params := prospectParams{}
-
-	// no need to handle 404 situations, will fall throuth REGEX
-	// to the indexHandler
-
 	page := template.Must(template.ParseFiles(
 		"static/_base.html",
 		"static/first-aid-cpr-aed.html",
@@ -181,7 +177,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	// 	Posted:  time.Now(),
 	// }
 
-	post := Post{
+	contact := Contact{
 		FirstName: firstName,
 		LastName:  lastName,
 		EmailAddr: emailAddr,
@@ -191,7 +187,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := appengine.NewContext(r)
-	key := datastore.NewIncompleteKey(ctx, "Post", nil)
+	key := datastore.NewIncompleteKey(ctx, "Contact", nil)
 
 	// Should be redundant -- Won't get to this handler with bad URL
 
@@ -200,12 +196,12 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	// 	return
 	// }
 
-	if _, err := datastore.Put(ctx, key, &post); err != nil {
+	if _, err := datastore.Put(ctx, key, &contact); err != nil {
 		log.Errorf(ctx, "datastore.Put: %v", err)
 
 		w.WriteHeader(http.StatusInternalServerError)
 		params.Notice = "Couldn't add new post. Try again?"
-		params.Message = post.Message // Preserve their message so they can try again.
+		params.Message = contact.Message // Preserve their message so they can try again.
 		page.Execute(w, params)
 		return
 	}
