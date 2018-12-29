@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"net/http"
 	"time"
+	"strconv"
 
 	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/log"
@@ -14,6 +15,7 @@ import (
 )
 
 type Contact struct {
+	Id        int
 	FirstName string
 	LastName  string
 	EmailAddr string
@@ -22,14 +24,15 @@ type Contact struct {
 	Posted    time.Time
 }
 
-type prospectParams struct {
+type templateParams struct {
 	Notice    string
+	Id        int
 	FirstName string
 	LastName  string
 	EmailAddr string
 	Phone     string
 	Message   string
-	Contacts     []Contact
+	Contacts  []Contact
 }
 
 func main() {
@@ -44,7 +47,7 @@ func main() {
 }
 
 func facaHandler(w http.ResponseWriter, r *http.Request) {
-	params := prospectParams{}
+	params := templateParams{}
 	page := template.Must(template.ParseFiles(
 		"static/_base.html",
 		"static/first-aid-cpr-aed.html",
@@ -57,7 +60,7 @@ func facaHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func babysittingHandler(w http.ResponseWriter, r *http.Request) {
-	params := prospectParams{}
+	params := templateParams{}
 
 	// no need to handle 404 situations, will fall throuth REGEX
 	// to the indexHandler
@@ -75,7 +78,7 @@ func babysittingHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	params := prospectParams{}
+	params := templateParams{}
 
 	// no need to handle 404 situations, will fall throuth REGEX
 	// to the indexHandler
@@ -93,7 +96,7 @@ func aboutHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func wfaHandler(w http.ResponseWriter, r *http.Request) {
-	params := prospectParams{}
+	params := templateParams{}
 
 	// no need to handle 404 situations, will fall throuth REGEX
 	// to the indexHandler
@@ -112,7 +115,7 @@ func wfaHandler(w http.ResponseWriter, r *http.Request) {
 
 func coursesHandler(w http.ResponseWriter, r *http.Request) {
 
-	params := prospectParams{}
+	params := templateParams{}
 
 	// no need to handle 404 situations, will fall throuth REGEX
 	// to the indexHandler
@@ -131,7 +134,7 @@ func coursesHandler(w http.ResponseWriter, r *http.Request) {
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 
-	params := prospectParams{}
+	params := templateParams{}
 
 	page := template.Must(template.ParseFiles(
 		"static/_base.html",
@@ -145,12 +148,18 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 	// It's a POST request, so handle the form submission.
 
+	id,err := strconv.Atoi(r.FormValue("id"))
+	if err!=nil {
+		params.Notice = "ID must be an integer."
+		id=-1;
+	}
 	firstName := r.FormValue("firstName")
 	lastName := r.FormValue("lastName")
 	emailAddr := r.FormValue("emailAddr")
 	phone := r.FormValue("phone")
 	message := r.FormValue("message")
 
+	params.Id = id
 	params.FirstName = firstName // Preserve the firstName field.
 	params.LastName = lastName   // Preserve the lastName field.
 	params.EmailAddr = emailAddr // Preserve the emailAddr field.
@@ -166,18 +175,13 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	if r.FormValue("message") == "" {
 		w.WriteHeader(http.StatusBadRequest)
 
-		params.Notice = "No message provided"
+		params.Notice = "Please send us a message."
 		page.Execute(w, params)
 		return
 	}
 
-	// post := Post{
-	// 	Author:  r.FormValue("author"),
-	// 	Message: r.FormValue("message"),
-	// 	Posted:  time.Now(),
-	// }
-
 	contact := Contact{
+		Id:        id,
 		FirstName: firstName,
 		LastName:  lastName,
 		EmailAddr: emailAddr,
@@ -188,13 +192,6 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 	ctx := appengine.NewContext(r)
 	key := datastore.NewIncompleteKey(ctx, "Contact", nil)
-
-	// Should be redundant -- Won't get to this handler with bad URL
-
-	// if r.URL.Path != "/" {
-	// 	http.Redirect(w, r, "/", http.StatusFound)
-	// 	return
-	// }
 
 	if _, err := datastore.Put(ctx, key, &contact); err != nil {
 		log.Errorf(ctx, "datastore.Put: %v", err)
@@ -214,7 +211,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	params := prospectParams{}
+	params := templateParams{}
 
 	// Set the default page
 
