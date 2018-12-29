@@ -46,72 +46,42 @@ func main() {
 	appengine.Main() // Starts the server to receive requests
 }
 
-func facaHandler(w http.ResponseWriter, r *http.Request) {
-	params := templateParams{}
-	page := template.Must(template.ParseFiles(
-		"static/_base.html",
-		"static/first-aid-cpr-aed.html",
-	))
 
-	if r.Method == "GET" {
-		page.Execute(w, params)
-		return
-	}
-}
+// func aboutHandler(w http.ResponseWriter, r *http.Request) {
+// 	params := templateParams{}
+//
+// 	// no need to handle 404 situations, will fall throuth REGEX
+// 	// to the indexHandler
+//
+// 	page := template.Must(template.ParseFiles(
+// 		"static/_base.html",
+// 		"static/about.html",
+// 	))
+//
+// 	if r.Method == "GET" {
+// 		page.Execute(w, params)
+// 		return
+// 	}
+//
+// }
 
-func babysittingHandler(w http.ResponseWriter, r *http.Request) {
-	params := templateParams{}
-
-	// no need to handle 404 situations, will fall throuth REGEX
-	// to the indexHandler
-
-	page := template.Must(template.ParseFiles(
-		"static/_base.html",
-		"static/babysitting.html",
-	))
-
-	if r.Method == "GET" {
-		page.Execute(w, params)
-		return
-	}
-
-}
-
-func aboutHandler(w http.ResponseWriter, r *http.Request) {
-	params := templateParams{}
-
-	// no need to handle 404 situations, will fall throuth REGEX
-	// to the indexHandler
-
-	page := template.Must(template.ParseFiles(
-		"static/_base.html",
-		"static/about.html",
-	))
-
-	if r.Method == "GET" {
-		page.Execute(w, params)
-		return
-	}
-
-}
-
-func wfaHandler(w http.ResponseWriter, r *http.Request) {
-	params := templateParams{}
-
-	// no need to handle 404 situations, will fall throuth REGEX
-	// to the indexHandler
-
-	page := template.Must(template.ParseFiles(
-		"static/_base.html",
-		"static/wilderness-first-aid.html",
-	))
-
-	if r.Method == "GET" {
-		page.Execute(w, params)
-		return
-	}
-
-}
+// func wfaHandler(w http.ResponseWriter, r *http.Request) {
+// 	params := templateParams{}
+//
+// 	// no need to handle 404 situations, will fall throuth REGEX
+// 	// to the indexHandler
+//
+// 	page := template.Must(template.ParseFiles(
+// 		"static/_base.html",
+// 		"static/wilderness-first-aid.html",
+// 	))
+//
+// 	if r.Method == "GET" {
+// 		page.Execute(w, params)
+// 		return
+// 	}
+//
+// }
 
 func coursesHandler(w http.ResponseWriter, r *http.Request) {
 
