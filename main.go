@@ -47,42 +47,6 @@ func main() {
 }
 
 
-// func aboutHandler(w http.ResponseWriter, r *http.Request) {
-// 	params := templateParams{}
-//
-// 	// no need to handle 404 situations, will fall throuth REGEX
-// 	// to the indexHandler
-//
-// 	page := template.Must(template.ParseFiles(
-// 		"static/_base.html",
-// 		"static/about.html",
-// 	))
-//
-// 	if r.Method == "GET" {
-// 		page.Execute(w, params)
-// 		return
-// 	}
-//
-// }
-
-// func wfaHandler(w http.ResponseWriter, r *http.Request) {
-// 	params := templateParams{}
-//
-// 	// no need to handle 404 situations, will fall throuth REGEX
-// 	// to the indexHandler
-//
-// 	page := template.Must(template.ParseFiles(
-// 		"static/_base.html",
-// 		"static/wilderness-first-aid.html",
-// 	))
-//
-// 	if r.Method == "GET" {
-// 		page.Execute(w, params)
-// 		return
-// 	}
-//
-// }
-
 func coursesHandler(w http.ResponseWriter, r *http.Request) {
 
 	params := templateParams{}
@@ -190,7 +154,7 @@ func indexHandler(w http.ResponseWriter, r *http.Request) {
 		"static/index.html",
 	))
 
-	//Overwrite the default page if it's an odball URL
+	//Display 404 if it's odball URL
 	if r.URL.Path != "/" {
 		page = template.Must(template.ParseFiles(
 			"static/_base.html",
