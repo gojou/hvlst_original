@@ -14,16 +14,6 @@ import (
 	"google.golang.org/appengine"
 )
 
-// type Contact struct {
-// 	Id        int
-// 	FirstName string
-// 	LastName  string
-// 	EmailAddr string
-// 	Phone     string
-// 	Message   string
-// 	Posted    time.Time
-// }
-
 type TemplateParams struct {
 	Notice    string
 	Id        int
@@ -45,8 +35,6 @@ func main() {
 	http.HandleFunc("/", indexHandler)
 	appengine.Main() // Starts the server to receive requests
 }
-
-
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	params := TemplateParams{}

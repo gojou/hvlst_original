@@ -2,16 +2,17 @@
 package main
 
 import (
-  	"fmt"
-  	"html/template"
-  	"net/http"
-  	"time"
-  	"strconv"
+	"context"
+	"fmt"
+	"html/template"
+	"net/http"
+	"strconv"
+	"time"
 
-  	"google.golang.org/appengine/datastore"
-  	"google.golang.org/appengine/log"
-  
-  	"google.golang.org/appengine"
+	"google.golang.org/appengine/datastore"
+	"google.golang.org/appengine/log"
+
+	"google.golang.org/appengine"
 )
 
 type Contact struct {
@@ -24,10 +25,10 @@ type Contact struct {
 	Posted    time.Time
 }
 
-
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 	params := TemplateParams{}
+	params.Notice="Stairway to Heaven"
 
 	page := template.Must(template.ParseFiles(
 		"static/_base.html",
@@ -41,10 +42,10 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 	// It's a POST request, so handle the form submission.
 
-	id,err := strconv.Atoi(r.FormValue("id"))
-	if err!=nil {
+	id, err := strconv.Atoi(r.FormValue("id"))
+	if err != nil {
 		params.Notice = "ID must be an integer."
-		id=-1;
+		id = -1
 	}
 	firstName := r.FormValue("firstName")
 	lastName := r.FormValue("lastName")
@@ -86,6 +87,15 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 	key := datastore.NewIncompleteKey(ctx, "Contact", nil)
 
+	params.Contacts = getContacts(ctx)
+	// var cs string
+	// for _, c := range params.Contacts {
+	// 	id := strconv.Itoa(c.Id)
+	// 	cs = cs + id + " : " + c.FirstName + " : " + c.LastName + " : " + c.Message + "\n"
+	// 	fmt.Printf(cs)
+	// }
+
+
 	if _, err := datastore.Put(ctx, key, &contact); err != nil {
 		log.Errorf(ctx, "datastore.Put: %v", err)
 
@@ -101,4 +111,18 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	page.Execute(w, params)
 	// [END execute]
 
+}
+
+func getContacts(ctx context.Context) []Contact {
+
+	params := TemplateParams{}
+
+	q := datastore.NewQuery("Contact").Order("-Id")
+
+	var contacts []Contact
+
+	if _, err := q.GetAll(ctx, &contacts); err != nil {
+		params.Notice = "Didn't find any messages"
+	}
+	return contacts
 }
