@@ -36,6 +36,8 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	))
 
 	if r.Method == "GET" {
+		ctx:= appengine.NewContext(r)
+		params.Contacts = getContacts(ctx)
 		page.Execute(w, params)
 		return
 	}
@@ -87,13 +89,6 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 	key := datastore.NewIncompleteKey(ctx, "Contact", nil)
 
-	params.Contacts = getContacts(ctx)
-	// var cs string
-	// for _, c := range params.Contacts {
-	// 	id := strconv.Itoa(c.Id)
-	// 	cs = cs + id + " : " + c.FirstName + " : " + c.LastName + " : " + c.Message + "\n"
-	// 	fmt.Printf(cs)
-	// }
 
 
 	if _, err := datastore.Put(ctx, key, &contact); err != nil {

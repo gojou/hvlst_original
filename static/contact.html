@@ -16,7 +16,9 @@
       <div class="card">
         <h5 class="card-title">Led Zepplin</h5>
         <p class="card-text">
-          {{.Notice}}
+          {{ range .Contacts }}
+          {{.Id}} — {{.FirstName}} {{.LastName}}<br/>
+          {{ end }}
         </p>
       </div>
     </div>
