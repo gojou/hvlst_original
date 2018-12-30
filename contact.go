@@ -28,7 +28,6 @@ type Contact struct {
 func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 	params := TemplateParams{}
-	params.Notice="Stairway to Heaven"
 
 	page := template.Must(template.ParseFiles(
 		"static/_base.html",
@@ -112,7 +111,7 @@ func getContacts(ctx context.Context) []Contact {
 
 	params := TemplateParams{}
 
-	q := datastore.NewQuery("Contact").Order("-Id")
+	q := datastore.NewQuery("Contact").Order("-Posted")
 
 	var contacts []Contact
 

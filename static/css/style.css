@@ -22,9 +22,10 @@
 }
 
 .card-text {
-  height: 120px !important;
+  padding-top: 12px;
+  /* height: 120px !important;
   overflow: hidden;
-    background-image: linear-gradient(to bottom, transparent, white);
+    background-image: linear-gradient(to bottom, transparent, white); */
 }
 
 .read-more {

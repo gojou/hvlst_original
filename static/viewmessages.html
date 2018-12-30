@@ -1,0 +1,20 @@
+{{ define "content" }}
+
+<h2>Messages</h2>
+<div class="container">
+  {{range .Contacts}}
+  <div class="card">
+    <h4 class="card-title">
+      {{.Id}} — {{.FirstName}} {{.LastName}}
+    </h4>
+    <h5 class="card-subtitle">
+      {{.EmailAddr}}
+    </h5>
+    <p class="card-text">
+      {{.Message}}
+    </p>
+
+  </div>
+  {{end}}
+</div>
+{{end}}

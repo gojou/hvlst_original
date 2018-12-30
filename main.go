@@ -2,11 +2,11 @@
 package main
 
 import (
-//	"fmt"
+	//	"fmt"
 	"html/template"
 	"net/http"
-//	"time"
-//	"strconv"
+	//	"time"
+	//	"strconv"
 
 	// "google.golang.org/appengine/datastore"
 	// "google.golang.org/appengine/log"
@@ -26,6 +26,7 @@ type TemplateParams struct {
 }
 
 func main() {
+	http.HandleFunc("/admin/messages", messagesHandler)
 	http.HandleFunc("/courses/babysitting", babysittingHandler)
 	http.HandleFunc("/courses/first-aid-cpr-aed", facaHandler)
 	http.HandleFunc("/courses/wilderness-first-aid", wfaHandler)
