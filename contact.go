@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
-	"strconv"
 	"time"
 
 	"google.golang.org/appengine/datastore"
@@ -43,18 +42,13 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 	// It's a POST request, so handle the form submission.
 
-	id, err := strconv.Atoi(r.FormValue("id"))
-	if err != nil {
-		params.Notice = "ID must be an integer."
-		id = -1
-	}
 	firstName := r.FormValue("firstName")
 	lastName := r.FormValue("lastName")
 	emailAddr := r.FormValue("emailAddr")
 	phone := r.FormValue("phone")
 	message := r.FormValue("message")
 
-	params.Id = id
+
 	params.FirstName = firstName // Preserve the firstName field.
 	params.LastName = lastName   // Preserve the lastName field.
 	params.EmailAddr = emailAddr // Preserve the emailAddr field.
@@ -76,7 +70,6 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	contact := Contact{
-		Id:        id,
 		FirstName: firstName,
 		LastName:  lastName,
 		EmailAddr: emailAddr,
@@ -111,7 +104,7 @@ func getContacts(ctx context.Context) []Contact {
 
 	params := TemplateParams{}
 
-	q := datastore.NewQuery("Contact").Order("-Id")
+	q := datastore.NewQuery("Contact").Order("-Posted")
 
 	var contacts []Contact
 
