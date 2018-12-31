@@ -1,9 +1,12 @@
 {{ define "content" }}
 
 <h2>Contact Us</h2>
+  <p class="h6">
+    {{.Notice}}
+    </p>
   <form action="/contact" method="post">
     <div class="row">
-  
+
       <div class="col-sm-6">
 
         <label for="firstName">First Name*</label>

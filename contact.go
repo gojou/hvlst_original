@@ -92,7 +92,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		page.Execute(w, params)
 		return
 	}
-	params.Notice = fmt.Sprintf("Thank you for your submission, %s! %s", firstName, lastName)
+	params.Notice = fmt.Sprintf("Thank you for your submission, %s!", firstName)
 
 	// [START execute]
 	page.Execute(w, params)
