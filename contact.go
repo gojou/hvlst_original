@@ -111,7 +111,7 @@ func getContacts(ctx context.Context) []Contact {
 
 	params := TemplateParams{}
 
-	q := datastore.NewQuery("Contact").Order("-Posted")
+	q := datastore.NewQuery("Contact").Order("-Id")
 
 	var contacts []Contact
 
