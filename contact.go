@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"time"
 
+	"google.golang.org/appengine"
 	"google.golang.org/appengine/datastore"
 	"google.golang.org/appengine/log"
-
-	"google.golang.org/appengine"
+	"google.golang.org/appengine/mail"
 )
 
 type Contact struct {
@@ -34,7 +34,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	))
 
 	if r.Method == "GET" {
-		ctx:= appengine.NewContext(r)
+		ctx := appengine.NewContext(r)
 		params.Contacts = getContacts(ctx)
 		page.Execute(w, params)
 		return
@@ -47,7 +47,6 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	emailAddr := r.FormValue("emailAddr")
 	phone := r.FormValue("phone")
 	message := r.FormValue("message")
-
 
 	params.FirstName = firstName // Preserve the firstName field.
 	params.LastName = lastName   // Preserve the lastName field.
@@ -81,8 +80,6 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
 	key := datastore.NewIncompleteKey(ctx, "Contact", nil)
 
-
-
 	if _, err := datastore.Put(ctx, key, &contact); err != nil {
 		log.Errorf(ctx, "datastore.Put: %v", err)
 
@@ -93,7 +90,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	params.Notice = fmt.Sprintf("Thank you for your submission, %s!", firstName)
-
+	notifyEmailMsg(ctx)
 	// [START execute]
 	page.Execute(w, params)
 	// [END execute]
@@ -113,3 +110,19 @@ func getContacts(ctx context.Context) []Contact {
 	}
 	return contacts
 }
+
+func notifyEmailMsg(ctx context.Context) {
+	msg := &mail.Message{
+		Sender:  "mark.poling@gmail.com",
+		To:      []string{"mark.poling@gmail.com"},
+		Subject: "HVLST has a new contact!",
+		Body:    fmt.Sprintf(confirmMsg),
+	}
+	if err := mail.Send(ctx, msg); err != nil {
+		log.Errorf(ctx, "Could not send email: %v", err)
+	}
+}
+
+const confirmMsg = `
+HVLST has a new contact!
+`
