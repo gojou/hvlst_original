@@ -90,7 +90,7 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	params.Notice = fmt.Sprintf("Thank you for your submission, %s!", firstName)
-	notifyEmailMsg(ctx)
+	notifyEmailMsg(ctx,contact)
 	// [START execute]
 	page.Execute(w, params)
 	// [END execute]
@@ -111,18 +111,22 @@ func getContacts(ctx context.Context) []Contact {
 	return contacts
 }
 
-func notifyEmailMsg(ctx context.Context) {
+func notifyEmailMsg(ctx context.Context, c Contact) {
+	messageBody := c.FirstName + " " + c.LastName + "\n"
+	messageBody = messageBody + c.EmailAddr + "\n"
+	messageBody = messageBody + c.Phone + "\n"
+	messageBody = messageBody + c.Message + "\n"
 	msg := &mail.Message{
 		Sender:  "mark.poling@gmail.com",
-		To:      []string{"mark.poling@gmail.com"},
-		Subject: "HVLST has a new contact!",
-		Body:    fmt.Sprintf(confirmMsg),
+		To:      []string{"mark.poling@gmail.com", "liz.polinghiraldo@gmail.com"},
+		Subject: mailSubject,
+		Body:    fmt.Sprintf(messageBody),
 	}
 	if err := mail.Send(ctx, msg); err != nil {
 		log.Errorf(ctx, "Could not send email: %v", err)
 	}
 }
 
-const confirmMsg = `
+const mailSubject = `
 HVLST has a new contact!
 `
