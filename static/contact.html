@@ -1,9 +1,9 @@
 {{ define "content" }}
-
-<h2>Contact Us</h2>
+<div class="container">
+  <h2>Contact Us</h2>
   <p class="h6">
     {{.Notice}}
-    </p>
+  </p>
   <form action="/contact" method="post">
     <div class="row">
 
@@ -49,5 +49,6 @@
     </div>
   </form>
 </div>
+
 
 {{ end }}

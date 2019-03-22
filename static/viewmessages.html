@@ -1,23 +1,26 @@
 {{ define "content" }}
-
-<h2>Messages</h2>
 <div class="container">
-  {{range .Contacts}}
-  <div class="card">
-    <h4 class="card-title">
-      {{.FirstName}} {{.LastName}}
-    </h4>
-    <h5 class="card-subtitle">
-      {{.EmailAddr}}
-    </h5>
-    <h5 class="card-subtitle">
-      {{.Phone}}
-    </h5>
-    <p class="card-text">
-      {{.Message}}
-    </p>
+  <h2>Messages</h2>
+  <div class="container">
+    {{range .Contacts}}
+    <div class="card">
+      <h4 class="card-title">
+        {{.FirstName}} {{.LastName}}
+      </h4>
+      <h5 class="card-subtitle">
+        {{.EmailAddr}}
+      </h5>
+      <h5 class="card-subtitle mt-3">
+        {{.Phone}}
+      </h5>
+      <p class="card-text">
+        {{.Message}}
+      </p>
+
+    </div>
+    {{end}}
+  </div>
+  <div>
 
   </div>
   {{end}}
-</div>
-{{end}}
