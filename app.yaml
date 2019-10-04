@@ -1,5 +1,4 @@
-runtime:       go
-api_version:   go1
+runtime:       go111
 
 handlers:
 
@@ -11,9 +10,9 @@ handlers:
 
 
 # All active conten handled by the app
-- url:         /admin/.*
-  script:      _go_app
-  login:       admin
+# - url:       /admin/.*
+#   script:    _go_app
 
 - url:         /.*
-  script:      _go_app
+  script:      auto
+  secure:      always

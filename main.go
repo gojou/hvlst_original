@@ -3,16 +3,24 @@ package main
 
 import (
 	//	"fmt"
+	// "time"
 	"html/template"
 	"net/http"
-	//	"time"
-	//	"strconv"
 
 	// "google.golang.org/appengine/datastore"
 	// "google.golang.org/appengine/log"
 
 	"google.golang.org/appengine"
 )
+// type Contact struct {
+// 	Id        int
+// 	FirstName string
+// 	LastName  string
+// 	EmailAddr string
+// 	Phone     string
+// 	Message   string
+// 	Posted    time.Time
+// }
 
 type TemplateParams struct {
 	Notice    string
@@ -24,6 +32,7 @@ type TemplateParams struct {
 	Message   string
 	Contacts  []Contact
 }
+
 
 func main() {
 	http.HandleFunc("/admin/messages", messagesHandler)
