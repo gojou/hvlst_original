@@ -1,0 +1,7 @@
+Google Client ID
+
+264382289392-ki4hitbp6aogv3lopk672sqk1p7bh2u0.apps.googleusercontent.com
+
+Client Secret
+
+vl_PF0MldM4DWT7oSzjRLAh3
